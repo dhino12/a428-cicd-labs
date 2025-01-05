@@ -18,8 +18,13 @@ pipeline {
         }
         stage('Manual Approval') {
             steps {
-                input message: 'Lanjutkan ke tahap Deploy?', abort: 'Abort'
-                sh './jenkins/scripts/kill.sh' 
+                def userInput = input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', parameters: []
+                if (!userInput) {
+                    // Jika tombol "Abort" ditekan, jalankan kill.sh
+                    sh './jenkins/scripts/kill.sh'
+                }
+                // input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
+                // sh './jenkins/scripts/kill.sh' 
             }
         }
         stage('Deploy') { 
