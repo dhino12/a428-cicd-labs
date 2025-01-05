@@ -18,9 +18,10 @@ pipeline {
         }
         stage('Manual Approval') {
             steps {
+                // Menunggu input dari user dengan tombol Proceed atau Abort
                 def userInput = input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', parameters: []
+                // Jika tombol Abort ditekan, jalankan kill.sh
                 if (!userInput) {
-                    // Jika tombol "Abort" ditekan, jalankan kill.sh
                     sh './jenkins/scripts/kill.sh'
                 }
                 // input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
