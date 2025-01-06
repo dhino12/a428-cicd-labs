@@ -20,9 +20,6 @@ pipeline {
             steps {
                 input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', parameters: []
             }
-            // steps {
-            //     sh './jenkins/scripts/kill.sh'
-            // }
         }
         stage('Deploy') { 
             steps {
